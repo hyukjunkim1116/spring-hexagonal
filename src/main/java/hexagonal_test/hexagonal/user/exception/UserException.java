@@ -1,4 +1,4 @@
-package hexagonal_test.hexagonal.common.domain.exception;
+package hexagonal_test.hexagonal.user.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

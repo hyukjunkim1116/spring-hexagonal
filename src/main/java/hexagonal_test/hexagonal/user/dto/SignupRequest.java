@@ -1,4 +1,4 @@
-package hexagonal_test.hexagonal.user.controller.request;
+package hexagonal_test.hexagonal.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class SignupRequest {
 
     @Size(min = 3, max = 25)
@@ -23,11 +24,4 @@ public class SignupRequest {
     @Email(message = "이메일 형식이 올바르지 않습니다.")
     private String email;
 
-    @Builder
-    public SignupRequest(String username, String password1, String password2, String email) {
-        this.username = username;
-        this.password1 = password1;
-        this.password2 = password2;
-        this.email = email;
-    }
 }

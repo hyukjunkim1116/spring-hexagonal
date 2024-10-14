@@ -1,8 +1,7 @@
-package hexagonal_test.hexagonal.user.controller.request;
+package hexagonal_test.hexagonal.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -14,10 +13,4 @@ public class LoginRequest {
 
     @NotEmpty(message = "비밀번호는 필수항목입니다.")
     private String password;
-
-    @Builder
-    public LoginRequest(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }

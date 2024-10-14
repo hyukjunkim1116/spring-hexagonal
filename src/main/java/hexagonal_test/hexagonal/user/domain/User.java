@@ -1,51 +1,33 @@
 package hexagonal_test.hexagonal.user.domain;
 
-import hexagonal_test.hexagonal.common.domain.exception.PasswordNotMatchException;
-import hexagonal_test.hexagonal.user.controller.request.LoginRequest;
-import hexagonal_test.hexagonal.user.controller.request.SignupRequest;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "users")
 public class User {
 
-    private final Long id;
-    private final String email;
-    private final String password;
-    private final String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
+    private String email;
+
+    private String password;
+
+    @Column(unique = true)
+    private String username;
 
     @Builder
-    public User(Long id, String email, String password, String username) {
-        this.id = id;
+    public User(String email, String password, String username) {
         this.email = email;
         this.password = password;
         this.username = username;
     }
-
-    public static User from(SignupRequest signupRequest, String encodedPassword) {
-        return User.builder()
-                .email(signupRequest.getEmail())
-                .username(signupRequest.getUsername())
-                .password(encodedPassword)
-                .build();
-    }
-
-    public User login() {
-        return User.builder()
-                .id(id)
-                .email(email)
-                .password(password)
-                .username(username)
-                .build();
-    }
-
-    public static void checkPassword(String password1, String password2) {
-        if (!password1.equals(password2)) {
-            throw new PasswordNotMatchException();
-        }
-    }
-
-
 }

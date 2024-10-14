@@ -1,4 +1,4 @@
-package hexagonal_test.hexagonal.common.controller.web.argumentresolver;
+package hexagonal_test.hexagonal.config.argumentresolver;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

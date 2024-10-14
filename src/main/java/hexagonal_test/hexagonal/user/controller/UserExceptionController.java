@@ -1,7 +1,7 @@
-package hexagonal_test.hexagonal.common.controller;
+package hexagonal_test.hexagonal.user.controller;
 
-import hexagonal_test.hexagonal.common.domain.ErrorResponse;
-import hexagonal_test.hexagonal.common.domain.exception.UserException;
+import com.example.qna_backend.user.dto.ErrorResponse;
+import com.example.qna_backend.user.exception.UserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
-public class ExceptionControllerAdvice {
+public class UserExceptionController {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorResponse invalidRequestHandler(MethodArgumentNotValidException e) {
 
+        // DTO에서 작성 오류 메세지가 defaultMessage에 저장된다.
+        // 하나만 지정했으므로 첫번째 값을 가져오면 된다.
         String defaultMessage = e.getBindingResult()
                 .getFieldErrors()
                 .stream()

@@ -1,7 +1,14 @@
-package hexagonal_test.hexagonal.common.domain;
+package hexagonal_test.hexagonal.user.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+
+/**
+ * {
+ * "code": "400",
+ * "message": "잘못된 요청입니다."
+ * }
+ */
 
 @Getter
 public class ErrorResponse {
@@ -15,3 +22,4 @@ public class ErrorResponse {
         this.message = message;
     }
 }
+

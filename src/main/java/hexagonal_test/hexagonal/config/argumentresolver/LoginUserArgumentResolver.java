@@ -1,7 +1,7 @@
-package hexagonal_test.hexagonal.common.controller.web.argumentresolver;
+package hexagonal_test.hexagonal.config.argumentresolver;
 
-import hexagonal_test.hexagonal.common.service.SessionManager;
-import hexagonal_test.hexagonal.user.controller.request.UserInfo;
+import hexagonal_test.hexagonal.user.dto.UserInfo;
+import hexagonal_test.hexagonal.util.SessionConst;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.core.MethodParameter;
@@ -32,6 +32,6 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
             return null;
         }
         // 로그인시에 넣어놨던 유저 객체 꺼내기
-        return session.getAttribute(SessionManager.LOGIN_MEMBER);
+        return session.getAttribute(SessionConst.LOGIN_MEMBER);
     }
 }

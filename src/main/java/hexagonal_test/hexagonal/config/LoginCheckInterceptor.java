@@ -1,19 +1,21 @@
-package hexagonal_test.hexagonal.common.controller.web.interceptor;
+package hexagonal_test.hexagonal.config;
 
-
+import com.example.qna_backend.user.dto.ErrorResponse;
+import com.example.qna_backend.util.SessionConst;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hexagonal_test.hexagonal.common.service.SessionManager;
-import hexagonal_test.hexagonal.common.domain.ErrorResponse;
+import hexagonal_test.hexagonal.util.SessionConst;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.IOException;
 
+@Slf4j
 public class LoginCheckInterceptor implements HandlerInterceptor {
 
 
@@ -43,7 +45,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         }
 
         // 클라이언트가 보낸 세션 ID가 없는지? 서버에서 설정한 유저 객체가 있는지? 확인
-        if (clientSessionId == null || serverSession.getAttribute(SessionManager.LOGIN_MEMBER)
+        if (clientSessionId == null || serverSession.getAttribute(SessionConst.LOGIN_MEMBER)
                 == null) {
             sendErrorResponse(response, SessionError.NO_SESSION.getMessage());
             return false;
@@ -56,6 +58,10 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             return false;
         }
 
+        // 질문 수정,삭제 기능 구현시에 질문 작성자와 요청 보낸 사용자가 같은지 판단하기 위해 컨트롤러로 유저 아이디를 넘겨줌.
+//        UserInfo user = (UserInfo) serverSession.getAttribute(SessionConst.LOGIN_MEMBER);
+//        Long id = user.getId();
+//        request.setAttribute(SessionConst.REQUEST_USER_ID,id);
         return true;
     }
 

@@ -1,7 +1,6 @@
 package hexagonal_test.hexagonal.config;
 
-import hexagonal_test.hexagonal.common.controller.web.argumentresolver.LoginUserArgumentResolver;
-import hexagonal_test.hexagonal.common.controller.web.interceptor.LoginCheckInterceptor;
+import com.example.qna_backend.config.argumentresolver.LoginUserArgumentResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -10,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginCheckInterceptor())

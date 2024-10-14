@@ -1,7 +1,5 @@
-package hexagonal_test.hexagonal.user.infrastructure;
+package hexagonal_test.hexagonal.util;
 
-
-import hexagonal_test.hexagonal.user.service.port.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKeyFactory;
@@ -14,7 +12,7 @@ import java.security.spec.KeySpec;
 import java.util.Base64;
 
 @Component
-public class PasswordEncoderImpl implements PasswordEncoder {
+public class PasswordEncoder {
 
     public String encode(String email, String password) {
         try {
@@ -29,7 +27,10 @@ public class PasswordEncoderImpl implements PasswordEncoder {
         }
     }
 
-    private byte[] getSalt(String email) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    // 비밀번호가 같은 사용자끼리 암호화한 값이 같으므로 이메일을 이용해 솔트값 생성
+    // 사용자별로 암호화된 비밀번호 값이 다르다
+    private byte[] getSalt(String email)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         MessageDigest digest = MessageDigest.getInstance("SHA-512");
         byte[] keyBytes = email.getBytes("UTF-8");
