@@ -27,3 +27,84 @@
 
 - **입력 포트 (Input Port)**: 시스템의 주요 기능을 정의합니다. 클라이언트 요청을 받아서 도메인 로직을 호출합니다.
 - **출력 포트 (Output Port)**: 데이터 저장소나 외부 API 호출을 정의합니다. 도메인 로직에서 데이터를 저장하거나 조회할 때 사용됩니다.
+
+## 📂 프로젝트 디렉토리 구조
+
+- 헥사고날 아키텍처
+
+```
+├── common
+│   ├── controller
+│   │   ├── ExceptionControllerAdvice.java
+│   │   └── web
+│   │       ├── argumentresolver
+│   │       │   ├── Login.java
+│   │       │   └── LoginUserArgumentResolver.java
+│   │       └── interceptor
+│   │           └── LoginCheckInterceptor.java
+│   ├── domain
+│   │   ├── ErrorResponse.java
+│   │   └── exception
+│   │       ├── AlreadyExistsEmailException.java
+│   │       ├── AlreadyExistsUsernameException.java
+│   │       ├── PasswordNotMatchException.java
+│   │       ├── UserException.java
+│   │       └── UserNotFound.java
+│   └── service
+│       └── SessionManager.java
+├── config
+│   └── WebMvcConfig.java
+└── user
+    ├── controller
+    │   ├── UserController.java
+    │   └── request
+    │       ├── LoginRequest.java
+    │       ├── SignupRequest.java
+    │       └── UserInfo.java
+    ├── domain
+    │   └── User.java
+    ├── infrastructure
+    │   ├── PasswordEncoderImpl.java
+    │   ├── UserEntity.java
+    │   ├── UserJpaRepository.java
+    │   └── UserRepositoryImpl.java
+    └── service
+        ├── UserService.java
+        └── port
+            ├── PasswordEncoder.java
+            └── UserRepository.java
+```
+
+- 레이어드 아키텍처
+
+```
+├── config
+│   ├── LoginCheckInterceptor.java
+│   ├── WebConfig.java
+│   └── argumentresolver
+│       ├── Login.java
+│       └── LoginUserArgumentResolver.java
+├── user
+│   ├── controller
+│   │   ├── UserController.java
+│   │   └── UserExceptionController.java
+│   ├── domain
+│   │   └── User.java
+│   ├── dto
+│   │   ├── ErrorResponse.java
+│   │   ├── LoginRequest.java
+│   │   ├── SignupRequest.java
+│   │   └── UserInfo.java
+│   ├── exception
+│   │   ├── AlreadyExistsEmailException.java
+│   │   ├── PasswordNotMatchException.java
+│   │   ├── UserException.java
+│   │   └── UserNotFound.java
+│   ├── repository
+│   │   └── UserRepository.java
+│   └── service
+│       └── UserService.java
+└── util
+    ├── PasswordEncoder.java
+    └── SessionConst.java
+```  
